@@ -27,7 +27,8 @@ public class GUI {
                 
             }
             if(respuesta == 2){   //Inicia El juego Batalla Naval
-
+                BatallaNaval juego = new BatallaNaval();
+                juego.InicioBS();
             }
         }
 

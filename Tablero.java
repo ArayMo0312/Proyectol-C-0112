@@ -3,8 +3,15 @@ public class Tablero { // Clase de Batalla naval
     int filas = 5;
     int columnas = 5;
 
-    char[][] tablero = new char[filas][columnas];
+    private char[][] tablero = new char[filas][columnas];
 
+    public char[][] getTablero(){
+        return tablero;
+    }
+    public void setTablero(char[][] tablero){
+        this.tablero = tablero;
+    }
+    
     public Tablero(){                //Llenar tablero
 
         for(int i = 0; i < filas; i++){
