@@ -1,11 +1,11 @@
-public class BattleShip {
+public class Tablero { // Clase de Batalla naval
     
     int filas = 5;
     int columnas = 5;
 
     char[][] tablero = new char[filas][columnas];
 
-    public BattleShip(){                //Llenar tablero
+    public Tablero(){                //Llenar tablero
 
         for(int i = 0; i < filas; i++){
             for(int j = 0; j < columnas; j++){
