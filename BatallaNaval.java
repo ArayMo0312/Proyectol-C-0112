@@ -2,18 +2,11 @@ import java.util.Scanner;
 public class BatallaNaval { // Clase de Batalla naval
     
     Tablero tablero = new Tablero();
+    Scanner input = new Scanner(System.in);
 
     public void InicioBS(){
 
-        Barco[] barcos = new Barco[4];
-
-        barcos[0] = new Barco(1, 1, 3, 1); 
-        barcos[1] = new Barco(3, 3, 1, 2); 
-        barcos[2] = new Barco(0, 3, 1, 2); 
-        barcos[3] = new Barco(0, 0, 4, 1); 
-
-
-        colocarBarcos(tablero, barcos);
+        colocarBarcos(tablero);
 
         tablero.mostrarTablero();
 
@@ -25,25 +18,95 @@ public class BatallaNaval { // Clase de Batalla naval
         
     }
 
-    public void colocarBarcos(Tablero tablero, Barco[] barcos){
+    public void colocarBarcos(Tablero tablero){
 
         char[][] matriz = tablero.getTablero();
 
-        for(int i = 0; i < barcos.length; i++){
-            Barco barco = barcos[i];
+        int[] tamaños = {2, 2, 3, 4};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
+        Barco[] barcos = new Barco[tamaños.length];
 
-            for(int fila = 0; fila < barco.getlargo(); fila++){
-                for(int col = 0; col < barco.getAncho(); col++){
+        for(int i = 0; i < tamaños.length; i++){
 
-                    int ultimaFila = barco.getFila() + fila;
-                    int ultimaColumna = barco.getColumna() + col;
+            boolean colocado = false;
+            
+            while(!colocado){
 
-                    if(ultimaFila < matriz.length && ultimaColumna < matriz[0].length){
-                        matriz[ultimaFila][ultimaColumna] = 'B';
+                int fila;
+                int columna;
+                char direccion;
+                boolean espacioLibre = true;
+
+                System.out.println("Coloque el barco # " + (i + 1) + " con un tamaño de " + tamaños[i] + " casillas." );
+                System.out.println("");
+                System.out.println("(Tome encuenta las dimensiones del barco y la disponibilidad de casillas antes de colocarlo)");
+                System.out.println("");
+                System.out.println("");
+                System.out.println("Seleccione la fila (0 - 4): ");
+
+                fila = input.nextInt();
+
+                if (fila < 0 || fila > 4 ) {
+                    System.out.println("Fila invalida, intente de nuevo.");
+                    continue;
+                }
+
+                System.out.println("Seleccione la columna (0 - 4): ");
+
+                columna = input.nextInt();
+
+                if (columna < 0 || columna > 4 ) {
+                    System.out.println("Columna invalida, intente de nuevo.");
+                    input.next();
+                    continue;
+                }
+
+                System.out.println("Eliga la direccion (H para horizontal, V para vertical): ");
+
+                direccion = input.next().toUpperCase().charAt(0);
+
+                if(direccion != 'H' && direccion != 'V'){
+                    System.out.println("Direccion invalida, intente de nuevo.");
+                    continue;
+                }
+
+                int largo = (direccion == 'V') ? tamaños[i] : 1; // Largo tomara el valor del tamaño del barco o de 1 segun la direccion elegida
+                int ancho = (direccion == 'H') ? tamaños[i] : 1; // Ancho tomara el valor del tamaño del barco o de 1 segun la direccion elegida
+
+
+
+                if((fila + largo) > 5 || columna + ancho > 5){  //Prueba si la posicion del barco se encuentra en los limites del tablero 
+                    System.out.println("EL barco sale de los limites del tablero intente de nuevo.");
+                    continue;
+                }
+
+                //Aqui se comprueba si no hay otro barco en esa posicion o chocando entre si, recorre la matriz comprobando por Barcos "B"
+
+                for(int f = 0; f < largo; f++) {
+                    for(int c = 0; c < ancho; c++){
+                        if(matriz[fila + f][columna + c] == 'B'){
+                            espacioLibre = false;
+                            break;
+                        }
                     }
                 }
-            }
 
+                if(!espacioLibre){
+                    System.out.println("El barco que desea colocar interfiere con la posicion de otro barco anteriormente colocado, intente de nuevo");
+                    continue;
+                }
+
+                //Si no hay problema con los casos anteriores finalmente se coloca el barco en la posicion dada por el usuario
+
+                for(int f = 0; f < largo; f++){
+                    for(int c = 0 ; c < ancho; c++){
+                        matriz[fila + f][columna + c] = 'B'; //Coloca la letra B en el tablero 
+                    }
+                }
+
+                barcos[i] = new Barco(fila, columna, largo, ancho);
+                colocado = true;
+
+            }
         }
 
     }
@@ -91,6 +154,16 @@ public class BatallaNaval { // Clase de Batalla naval
             }
         }
         return false; // Todos hundidos
+
+    }
+
+    public void Jugadores(){
+
+        Tablero tableroJ1 = new Tablero();
+        Tablero tableroJ2 = new Tablero();
+
+       // Barco[] barcosJ1 = colocarBarcos(tablero, barcos);
+      //  Barco[] barcosJ2 = colocarBarcos(tablero, asdwd );
 
     }
     

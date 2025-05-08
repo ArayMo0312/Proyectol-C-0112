@@ -20,7 +20,7 @@ public class Barco { // Clase de Batalla naval
     public int getColumna(){
         return columna;
     }
-    public int getlargo(){
+    public int getLargo(){
         return largo;
     }
     public int getAncho(){
