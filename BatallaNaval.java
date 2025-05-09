@@ -6,7 +6,24 @@ public class BatallaNaval { // Clase de Batalla naval
 
     public void InicioBS(){
 
-        colocarBarcos(tablero);
+        System.out.println();
+        System.out.println("Bienvenidos a batalla naval!");
+        System.out.println("(Si quiere ver las intrucciones presione 1, si desea continuar al juego presione 2)");
+
+        int r = input.nextInt(); 
+
+        if(r == 1){intrucciones();}     //Mostrar las instrucciones 
+
+        input.nextLine();
+        
+        System.out.println();
+        System.out.println("Listos para la batalla?");
+        System.out.println("(Presione ENTER para comenzar)");
+        System.out.println();
+
+        input.nextLine();
+
+        Jugadores();            //LLama al metodo jugadores
 
         tablero.mostrarTablero();
 
@@ -56,7 +73,6 @@ public class BatallaNaval { // Clase de Batalla naval
 
                 if (columna < 0 || columna > 4 ) {
                     System.out.println("Columna invalida, intente de nuevo.");
-                    input.next();
                     continue;
                 }
 
@@ -162,8 +178,41 @@ public class BatallaNaval { // Clase de Batalla naval
         Tablero tableroJ1 = new Tablero();
         Tablero tableroJ2 = new Tablero();
 
-       // Barco[] barcosJ1 = colocarBarcos(tablero, barcos);
-      //  Barco[] barcosJ2 = colocarBarcos(tablero, asdwd );
+        System.out.println("Jugador 1, coloca los barcos en el tablero");
+        System.out.println();
+
+        colocarBarcos(tableroJ1);
+
+        System.out.println("Jugador 2, coloca los barcos en el tablero");
+        System.out.println();
+        colocarBarcos(tableroJ2);
+
+
+    }
+
+    public void intrucciones(){
+        System.out.println();
+        System.out.println("--------------INSTRUCCIONES--------------");
+        System.out.println();
+        System.out.println("1.Cada jugador cuenta con un lado del tablero y 4 barcos de diferentes tamaños.");
+        System.out.println();
+        System.out.println("1.Los jugadores deberan colocar los barcos en cada lado de su tablero.");
+        System.out.println();
+        System.out.println("2.Una vez colocados, atacaran una coordenanda del tablero, una vez por turno.");
+        System.out.println();
+        System.out.println("3.Si el ataque impacta a una nave enemiga se marcara en el tablero con una 'X'.");
+        System.out.println();
+        System.out.println("4.Si de lo contario, el ataque falla, se marcara en el tablero con una'O'.");
+        System.out.println();
+        System.out.println("5.El primer jugador en acabar con todaslas naves enemigas es el ganador!!!");
+        System.out.println();
+        System.out.println();
+
+        input.nextLine();
+
+        System.out.println("(Presione ENTER para continuar)");
+
+        input.nextLine();
 
     }
     
