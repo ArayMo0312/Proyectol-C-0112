@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class GUI {
 
     Scanner input = new Scanner(System.in);
-    int respuesta;
+    int respuesta; //private getters y setters
 
 
     public void Inicio(){

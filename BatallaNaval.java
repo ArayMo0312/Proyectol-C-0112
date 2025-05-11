@@ -39,7 +39,7 @@ public class BatallaNaval { // Clase de Batalla naval
 
         char[][] matriz = tablero.getTablero();
 
-        int[] tamaños = {2, 2, 3, 4};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
+        int[] tamaños = {2, 4};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
         Barco[] barcos = new Barco[tamaños.length];
 
         for(int i = 0; i < tamaños.length; i++){
@@ -55,7 +55,7 @@ public class BatallaNaval { // Clase de Batalla naval
 
                 System.out.println("Coloque el barco # " + (i + 1) + " con un tamaño de " + tamaños[i] + " casillas." );
                 System.out.println("");
-                System.out.println("(Tome encuenta las dimensiones del barco y la disponibilidad de casillas antes de colocarlo)");
+                System.out.println("(Tome en cuenta las dimensiones del barco y la disponibilidad de casillas antes de colocarlo)");
                 System.out.println("");
                 System.out.println("");
                 System.out.println("Seleccione la fila (0 - 4): ");
