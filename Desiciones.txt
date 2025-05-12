@@ -13,3 +13,4 @@ Decisiones de implementación:
 
 Puntos de mejora:
 - Mejorar el código con respecto a la eficiencia con la que trabaja.
+- Mejorar el orden del mismo.
