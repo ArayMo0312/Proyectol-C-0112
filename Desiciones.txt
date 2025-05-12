@@ -1,0 +1,15 @@
+Acuerdos de pareja:
+- David Araya desarrollo el juego de Batalla Naval y la respectiva integración con el GUI.
+- Jarek Morales desarrolló el juego de Ahorcado y la respectiva integración con el GUI.
+- Ambos trabajamos en el GUI
+
+con respecto al diseño:
+- Se Separaron los juegos en clases independientes y varias para mantener orden.
+
+Decisiones de implementación:
+- Usamos Scanner para entrada de datos y System.out.print para salida.
+- Usamos estructuras básicas como arreglos, ciclos y condicionales.
+- Implementamos turnos alternos y control de entradas invalidas entre otros.
+
+Puntos de mejora:
+- Mejorar el código con respecto a la eficiencia con la que trabaja.
