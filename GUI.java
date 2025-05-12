@@ -77,15 +77,30 @@ public class GUI {
                 }
             }
             if(respuesta == 2){   //Inicia El juego Batalla Naval
-                BatallaNaval juego = new BatallaNaval();
+                boolean jugar = true;
+                while (jugar){
+
+                    BatallaNaval juego = new BatallaNaval();
 
                     System.out.println("BATALLA NAVAL");
-                juego.InicioBS();
+                    juego.InicioBS();
+
+                    System.out.println("");
+                    System.out.println("Desea jugar otra vez? (1.SI  -  2.No)");
+
+                    respuesta = input.nextInt();
+
+                    if (respuesta == 2){jugar = false;}     //confirmacion para jugar otra vez
+                }
             }
         }
 
+        System.out.println("Gracias por jugar!");
+
     }
-    public void limpiarPantalla(){
+
+
+    public static void limpiarPantalla(){                   //Metodo para simular una limpieza de pantalla
         for (int i = 0; i < 50; i++) {System.out.println();}
     }
 

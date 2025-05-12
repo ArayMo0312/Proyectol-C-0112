@@ -1,11 +1,13 @@
 import java.util.Scanner;
 public class BatallaNaval { // Clase de Batalla naval
     
-    Tablero tablero = new Tablero();
+    Tablero tableroJ1 = new Tablero();
+    Tablero tableroJ2 = new Tablero();
     Scanner input = new Scanner(System.in);
 
     public void InicioBS(){
 
+        GUI.limpiarPantalla();
         System.out.println();
         System.out.println("Bienvenidos a batalla naval!");
         System.out.println("(Si quiere ver las intrucciones presione 1, si desea continuar al juego presione 2)");
@@ -25,26 +27,102 @@ public class BatallaNaval { // Clase de Batalla naval
 
         Jugadores();            //LLama al metodo jugadores
 
-        tablero.mostrarTablero();
+        boolean turno = true;
 
-        while(quedanBarcos(tablero)) {
-            atacar(tablero);
+        while(quedanBarcos(tableroJ1) && quedanBarcos(tableroJ2)) {
+            if(turno){
+                System.out.println("Jugador 1 Ataca!");
+                System.out.println("");
+                System.out.println("(Tablero J2)");
+                tableroJ2.tableroOculto();  //Muestra el tablero oculto del jugador 2
+                System.out.println("");
+
+                boolean acierto = atacar(tableroJ2);
+
+                System.out.println("");
+                System.out.println("(Tablero J2)");
+                tableroJ2.tableroOculto();  //Muestra el tablero del jugador 2 post ataque
+                System.out.println("");
+
+                if(!acierto){
+                    turno = false;
+                    System.out.println("");
+                    System.out.println("(Presione ENTER para continiar)");
+
+                    input.nextLine();
+
+                    GUI.limpiarPantalla();
+                }
+                else{
+
+                    System.out.println("");
+                    System.out.println("(Presione ENTER para volver a atacar!)");
+
+                    input.nextLine();
+                }
+
+
+            }
+            else{
+                System.out.println("Jugador 2 Ataca!");
+                System.out.println("");
+                System.out.println("(Tablero J1)");
+                tableroJ1.tableroOculto(); //Muestra el tablero oculto del jugador 1
+                System.out.println("");
+
+                boolean acierto = atacar(tableroJ1);
+
+                System.out.println("");
+                System.out.println("(Tablero J1)");
+                tableroJ1.tableroOculto();  //Muestra el tablero del jugador1 post ataque
+                System.out.println("");
+
+                if(!acierto){
+                    turno = true;
+                    System.out.println("");
+                    System.out.println("(Presione Enter para coninuar)");
+
+                    input.nextLine();
+
+                    GUI.limpiarPantalla();
+
+                }
+                else{
+
+                    System.out.println("");
+                    System.out.println("(Presione ENTER para volver a atacar!)");
+
+                    input.nextLine();
+                }
+
+                
+            }
         }
-
-        System.out.println("Fin del Juego");
+        if(!quedanBarcos(tableroJ2)){       //Al salir del while porque ya no quedan barcos en alun tablero anuncia al ganador!
+            System.out.println("---------------EL ganador es el Jugador 1!!!!---------------"); 
+            System.out.println("");
+            System.out.println("......................Fin del juego.........................");
+            System.out.println("");
+        }
+        else{
+            System.out.println("---------------EL ganador es el Jugador 2!!!!---------------");
+            System.out.println("");
+            System.out.println("......................Fin del juego.........................");
+            System.out.println("");
+        }
         
     }
 
     public void colocarBarcos(Tablero tablero){
 
-        char[][] matriz = tablero.getTablero();
+        char[][] matriz = tablero.getTablero();     //un tablero lleno de agua(~)
 
-        int[] tamaños = {2, 4};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
+        int[] tamaños = {2, 2};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
         Barco[] barcos = new Barco[tamaños.length];
 
         for(int i = 0; i < tamaños.length; i++){
 
-            boolean colocado = false;
+            boolean colocado = false;       //No se han colocado los barcos
             
             while(!colocado){
 
@@ -58,27 +136,27 @@ public class BatallaNaval { // Clase de Batalla naval
                 System.out.println("(Tome en cuenta las dimensiones del barco y la disponibilidad de casillas antes de colocarlo)");
                 System.out.println("");
                 System.out.println("");
-                System.out.println("Seleccione la fila (0 - 4): ");
+                System.out.println("Seleccione la fila (0 - 4): "); //Elige la fila
 
                 fila = input.nextInt();
 
-                if (fila < 0 || fila > 4 ) {
+                if (fila < 0 || fila > 4 ) {            //prueba si es valido
                     System.out.println("Fila invalida, intente de nuevo.");
                     continue;
                 }
 
-                System.out.println("Seleccione la columna (0 - 4): ");
+                System.out.println("Seleccione la columna (0 - 4): "); //Elige la columna
 
                 columna = input.nextInt();
 
-                if (columna < 0 || columna > 4 ) {
+                if (columna < 0 || columna > 4 ) {      //prueba si es valido
                     System.out.println("Columna invalida, intente de nuevo.");
                     continue;
                 }
 
                 System.out.println("Eliga la direccion (H para horizontal, V para vertical): ");
 
-                direccion = input.next().toUpperCase().charAt(0);
+                direccion = input.next().toUpperCase().charAt(0); //Elige la direccion horizontal o vertical y lo pasa a mayuscula si es necesario
 
                 if(direccion != 'H' && direccion != 'V'){
                     System.out.println("Direccion invalida, intente de nuevo.");
@@ -127,36 +205,48 @@ public class BatallaNaval { // Clase de Batalla naval
 
     }
     
-    public void atacar(Tablero tablero){
+    public boolean atacar(Tablero tablero){            //metodo para atacar un tablero
 
         Scanner input = new Scanner(System.in);
         char[][] matriz = tablero.getTablero();
 
-        System.out.print("Ingrese fila (0 a 4): ");
-        int fila = input.nextInt();
+        
+
+        boolean tiroValido = false;
+
+        while(!tiroValido){ // en caso de que se salga de las coordenadas se puede disparar otra vez
+            
+            System.out.print("Ingrese fila (0 a 4): "); //pide las coordenadas aqui
+            int fila = input.nextInt();
     
-        System.out.print("Ingrese columna (0 a 4): ");
-        int columna = input.nextInt();
+            System.out.print("Ingrese columna (0 a 4): "); //y aqui
+            int columna = input.nextInt();
+        
+            if(fila >= 0 && fila < 5 && columna >= 0 && columna <5){ //Comprueba la coordenada y reacciona segun lo golpeado
+                tiroValido = true;
 
-        if(fila >= 0 && fila < 5 && columna >= 0 && columna <5){
-            if(matriz[fila][columna] == 'B'){
-                System.out.println("Tocado!");
-                matriz[fila][columna] = 'X';
-            }
-            else if (matriz[fila][columna] == '~'){
-                System.out.println("Agua! Intentalo de nuevo");
-                matriz[fila][columna] = 'O';
-
+                if(matriz[fila][columna] == 'B'){
+                    System.out.println("Tocado! Juega de nuevo!");
+                    matriz[fila][columna] = 'X';
+                    return true;
+                }
+                else if (matriz[fila][columna] == '~'){
+                    System.out.println("Agua!");
+                    matriz[fila][columna] = 'O';
+                    return false;
+                }
+                else{
+                    System.out.println("Ya atacaste ahí");
+                }
             }
             else{
-                System.out.println("Ya atacaste ahí");
+                System.out.println("");
+                System.out.println("Coordenadas invalidas, intente otra vez");
+                System.out.println("");
             }
-        }
-        else{
-            System.out.println("Coordenadas invalidas");
-        }
 
-        tablero.mostrarTablero();
+        }   
+        return false; // Solo por seguridad
     }
 
 
@@ -175,22 +265,34 @@ public class BatallaNaval { // Clase de Batalla naval
 
     public void Jugadores(){
 
-        Tablero tableroJ1 = new Tablero();
-        Tablero tableroJ2 = new Tablero();
 
         System.out.println("Jugador 1, coloca los barcos en el tablero");
         System.out.println();
 
-        colocarBarcos(tableroJ1);
+        colocarBarcos(tableroJ1);       // El jugador 1 coloca los barcos respectivos
+
+        System.out.println("Tablero del Jugador 1:");
+        tableroJ1.mostrarTablero();     //imprime el tablero para ver la colocacion
+        System.out.println("(Presione ENTER para continuar)");
+        input.nextLine();
+        input.nextLine();
+        GUI.limpiarPantalla();
 
         System.out.println("Jugador 2, coloca los barcos en el tablero");
         System.out.println();
-        colocarBarcos(tableroJ2);
 
+        colocarBarcos(tableroJ2);       // El jugador  coloca los barcos respectivos
+
+        System.out.println("Tablero del Jugador 2:");
+        tableroJ2.mostrarTablero();     //imprime el tablero para ver la colocacion
+        System.out.println("(Presione ENTER para continuar)");  
+        input.nextLine();
+        input.nextLine();
+        GUI.limpiarPantalla();
 
     }
 
-    public void intrucciones(){
+    public void intrucciones(){     //Intrucciones basicas del juego 
         System.out.println();
         System.out.println("--------------INSTRUCCIONES--------------");
         System.out.println();
@@ -212,11 +314,7 @@ public class BatallaNaval { // Clase de Batalla naval
 
         System.out.println("(Presione ENTER para continuar)");
 
-        input.nextLine();
-
     }
-    
-
 
 }
 
