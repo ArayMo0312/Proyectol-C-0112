@@ -4,7 +4,7 @@ public class Ahorcado {
     private String palabraSecreta;
     private char[] progreso;
     private int intentosRestantes;
-    private int intentosMaximos = 6;
+    private final int intentosMaximos = 6;
 
     public Ahorcado (String palabraSecreta) {
         this.palabraSecreta = palabraSecreta.toLowerCase();
@@ -16,9 +16,10 @@ public class Ahorcado {
     }
     }
 
-    public void jugar(){
+    public int jugar(){
         Scanner scanner = new Scanner(System.in);
         boolean adivinó = false;
+        int fallosEnEstaRonda = 0;
 
         System.out.println("--- Comienza el juego del Ahorcado! :) ---");
 
@@ -26,6 +27,7 @@ public class Ahorcado {
             System.out.print("Palabra: ");
             for (int i = 0; i < progreso.length; i++){
                 char x = progreso [i]; //variable para guardar el valor en el array progreso
+                System.out.print(progreso[i] + " ");
             }
 
             System.out.println("\n Intentos restantes: " + intentosRestantes);
@@ -41,9 +43,12 @@ public class Ahorcado {
             }
             if (!letraCorrecta) {
                 intentosRestantes--;
+                fallosEnEstaRonda++;
                 System.out.println("Letra incorrecta! :(");
+                System.out.println();
             } else {
                 System.out.println("Letra Correcta! :)");
+                System.out.println();
             }
             adivinó = true;
             for (int i = 0; i < progreso.length; i++){
@@ -54,6 +59,12 @@ public class Ahorcado {
                 }
             }
         }
+        if (adivinó) {
+            System.out.println("¡Adivinaste la palabra secreta!: " + palabraSecreta);
+        } else {
+            System.out.println("¡Perdiste! La palabra era: " + palabraSecreta);
+        }
+        return fallosEnEstaRonda;
     }
 }
 
