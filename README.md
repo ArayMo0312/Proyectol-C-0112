@@ -44,8 +44,8 @@ Este proyecto de Programación I permite jugar dos juegos clásicos en consola: 
 - BatallaNaval.java – controla el flujo del juego naval: colocar barcos, turnos, ataques.
 - Barco.java – Representa un barco con posición, largo y ancho.
 - Tablero.java – Representa la matriz 5x5 de cada jugador y métodos para mostrarla.
-- README.md – Este archivo de ayuda.
-- Archivo de decisiones.txt – Documento donde explicamos acuerdos, diseño y mejoras futuras.
+- README.md – Este archivo explicativo.
+- Archivo de decisiones.txt – Documento donde explicamos acuerdos, diseño, etc.
 
 ---
 
