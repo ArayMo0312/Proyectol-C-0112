@@ -61,6 +61,6 @@ Este proyecto de Programación I permite jugar dos juegos clásicos en consola: 
 
 Desarrollado por:
 - [David Araya Montero] – [C4C553]
-- [Nombre 2] – [Carné]
+- [Jarek Morales Prado] – [C4H722]
 
 Para el curso de **Programación I**, grupo C0112, ciclo 2025-1.
