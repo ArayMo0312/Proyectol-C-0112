@@ -154,7 +154,7 @@ public class BatallaNaval { // Clase de Batalla naval
                     continue;
                 }
 
-                System.out.println("Eliga la direccion (H para horizontal, V para vertical): ");
+                System.out.println("Elija la direccion (H para horizontal, V para vertical): ");
 
                 direccion = input.next().toUpperCase().charAt(0); //Elige la direccion horizontal o vertical y lo pasa a mayuscula si es necesario
 
