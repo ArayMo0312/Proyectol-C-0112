@@ -2,7 +2,7 @@
 
 Este proyecto de Programación I permite jugar dos juegos clásicos en consola: **Batalla Naval** y **Ahorcado**, desarrollados en Java. Ambos juegos están diseñados para dos jugadores, alternando turnos, validación de entradas y condiciones de victoria.
 
-## Ejecucion del pograma
+## Ejecucion del programa
 
 1. Abrí el proyecto en tu IDE (Blue J, Visual Studio, etc).
 2. Ejecutá la clase Main.java.
