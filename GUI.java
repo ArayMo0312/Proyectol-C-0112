@@ -7,7 +7,7 @@ public class GUI {
 
     public void Inicio(){
 
-        while(respuesta != 3){  //Se seguira el jueg hasta que el usuario responda 3
+        while(respuesta != 3){  //Se seguira el juego hasta que el usuario responda 3
 
             System.out.println("----------------------------ARCADE----------------------------");
             System.out.println("");
@@ -36,43 +36,13 @@ public class GUI {
 
                 boolean seguirJugando = true;
                 while (seguirJugando){
-                    System.out.println(jugador1.getNombre() + ", ingrese la palabra secreta: ");
-                    String palabra1 = input.nextLine();
-                    limpiarPantalla();
+                    int[] fallos = Ahorcado.jugarRondaAhorcado(jugador1, jugador2);
+                    Ahorcado.mostrarResultados(jugador1, jugador2, fallos[0], fallos[1]);
 
-                    System.out.println("Turno de " + jugador2.getNombre());
-                    Ahorcado juego1 = new Ahorcado (palabra1);
-                    int fallosJugador2 = juego1.jugar();
-                    jugador2.agregarFallos(fallosJugador2);
-
-                    System.out.println(jugador2.getNombre() + ", ingrese la palabra secreta: ");
-                    String palabra2 = input.nextLine();
-                    limpiarPantalla();
-
-                    System.out.println("Turno de " + jugador1.getNombre());
-                    Ahorcado juego2= new Ahorcado (palabra2);
-                    int fallosJugador1 = juego2.jugar();
-                    jugador1.agregarFallos(fallosJugador1);
-
-                    System.out.println("\n --- RESULTADOS DE LA RONDA ---");
-                    System.out.println(jugador1.getNombre() + " falló: " + fallosJugador1 + " veces.");
-                    System.out.println(jugador2.getNombre() + " falló: " + fallosJugador2 + " veces.");
-
-                    if (fallosJugador1 < fallosJugador2){
-                        System.out.println("¡El ganador de esta ronda es: " + jugador1.getNombre() + "!");
-                    }else if (fallosJugador1 > fallosJugador2){
-                        System.out.println("¡El ganador de esta ronda es: " + jugador2.getNombre() + "!");
-                    }else{
-                        System.out.println("¡Hubo un empate!");
-                    }
-                    System.out.println("\n --- PUNTAJE TOTAL ---");
-                    System.out.println(jugador1.getNombre() + ": " + jugador1.getFallosTotales() + " fallos acumulados.");
-                    System.out.println(jugador2.getNombre() + ": " + jugador2.getFallosTotales() + " fallos acumulados.");
                     
                     System.out.println("¿Desean jugar otra ronda? (s/n): ");
                     String continuar = input.nextLine().toLowerCase();
                     seguirJugando = continuar.equals("s");
-                    input.nextLine();
 
                 }
             }
