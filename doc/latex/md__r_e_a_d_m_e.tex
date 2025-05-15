@@ -1,0 +1,78 @@
+\chapter{Proyecto 1 -\/ Arcade de Batalla Naval y Ahorcado}
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Proyecto 1 -\/ Arcade de Batalla Naval y Ahorcado@{Proyecto 1 -\/ Arcade de Batalla Naval y Ahorcado}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+Este proyecto de Programación I permite jugar dos juegos clásicos en consola\+: {\bfseries{Batalla Naval}} y {\bfseries{\doxylink{class_ahorcado}{Ahorcado}}}, desarrollados en Java. Ambos juegos están diseñados para dos jugadores, alternando turnos, validación de entradas y condiciones de victoria.\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{\texorpdfstring{Ejecucion del programa}{Ejecucion del programa}}\label{md__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyEnumerate}
+\item Abrí el proyecto en tu IDE (Blue J, Visual Studio, etc).
+\item Ejecutá la clase \doxylink{_main_8java}{Main.\+java}.
+\item Aparecerá un menú con tres opciones\+:
+\begin{DoxyItemize}
+\item 1. \doxylink{class_ahorcado}{Ahorcado}
+\item 2. Batalla Naval
+\item 3. Salir
+\end{DoxyItemize}
+\item Ingresá el número del juego que querés jugar y seguí las instrucciones en consola.
+\end{DoxyEnumerate}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{Juegos incluidos}{Juegos incluidos}}\label{md__r_e_a_d_m_e_autotoc_md3}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysubsection{\texorpdfstring{Ahorcado}{Ahorcado}}\label{md__r_e_a_d_m_e_autotoc_md4}
+
+\begin{DoxyItemize}
+\item Jugador 1 escribe una palabra secreta.
+\item Jugador 2 intenta adivinarla, letra por letra.
+\item Tiene 6 oportunidades de error antes de perder.
+\item Luego se invierten los roles.
+\item Se pueden jugar múltiples rondas y se muestra un resumen de fallos y quién ganó.
+\item Al finalizar las rondas se puede reiniciar el juego con nuevos jugadores.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{Batalla Naval}{Batalla Naval}}\label{md__r_e_a_d_m_e_autotoc_md5}
+
+\begin{DoxyItemize}
+\item Cada jugador coloca 4 barcos de diferentes tamaños.
+\item Los barcos se colocan en un tablero de 5x5, eligiendo dirección (horizontal o vertical).
+\item Durante el juego\+:
+\begin{DoxyItemize}
+\item Si acertás el disparo (Tocado!), jugás de nuevo.
+\item Si fallás (Agua!), el turno pasa al otro jugador.
+\end{DoxyItemize}
+\item El juego termina cuando un jugador hunde todos los barcos del otro.
+\item Podés jugar varias partidas seguidas si así lo deseás.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{\texorpdfstring{Clases del Proyecto}{Clases del Proyecto}}\label{md__r_e_a_d_m_e_autotoc_md7}
+
+\begin{DoxyItemize}
+\item \doxylink{_main_8java}{Main.\+java} – Punto de entrada del programa.
+\item \doxylink{_g_u_i_8java}{GUI.\+java} – Muestra el menú prncipal y controla el flujo general de los juegos.
+\item \doxylink{_ahorcado_8java}{Ahorcado.\+java} – Contiene la lógica del juego de ahorcado.
+\item \doxylink{_jugador_ahorcado_8java}{Jugador\+Ahorcado.\+java} – Clase para llevar registro de nombre y fallos de cada jugador.
+\item \doxylink{_batalla_naval_8java}{Batalla\+Naval.\+java} – controla el flujo del juego naval\+: colocar barcos, turnos, ataques.
+\item \doxylink{_barco_8java}{Barco.\+java} – Representa un barco con posición, largo y ancho.
+\item \doxylink{_tablero_8java}{Tablero.\+java} – Representa la matriz 5x5 de cada jugador y métodos para mostrarla.
+\item \doxylink{_r_e_a_d_m_e_8md}{README.\+md} – Este archivo explicativo.
+\item Archivo de decisiones.\+txt – Documento donde explicamos acuerdos, diseño, etc.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysection{\texorpdfstring{Requisitos}{Requisitos}}\label{md__r_e_a_d_m_e_autotoc_md9}
+
+\begin{DoxyItemize}
+\item Java 8 o superior.
+\item Entrada y salida en consola (Scanner y System.\+out.\+print).
+\item Código modular, limpio y separado.
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysection{\texorpdfstring{Créditos}{Créditos}}\label{md__r_e_a_d_m_e_autotoc_md11}
+Desarrollado por\+:
+\begin{DoxyItemize}
+\item \mbox{[}David Araya Montero\mbox{]} – \mbox{[}C4\+C553\mbox{]}
+\item \mbox{[}Jarek Morales Prado\mbox{]} – \mbox{[}C4\+H722\mbox{]}
+\end{DoxyItemize}
+
+Para el curso de {\bfseries{Programación I}}, grupo C0112, ciclo 2025-\/1. 
