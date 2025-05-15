@@ -26,7 +26,6 @@ public class Ahorcado {
         while (intentosRestantes > 0 && !adivinó) {
             System.out.print("Palabra: ");
             for (int i = 0; i < progreso.length; i++){
-                char x = progreso [i]; //variable para guardar el valor en el array progreso
                 System.out.print(progreso[i] + " ");
             }
 
