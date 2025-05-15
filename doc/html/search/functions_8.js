@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quedanbarcos_0',['quedanBarcos',['../class_batalla_naval.html#adeec48d0028fa8842b2c15bafb75b156',1,'BatallaNaval']]]
+  ['pedirpalabrasecreta_0',['pedirPalabraSecreta',['../class_ahorcado.html#a1b72e241604dce3f9a69ccdd295509e8',1,'Ahorcado']]]
 ];
