@@ -117,7 +117,7 @@ public class BatallaNaval { // Clase de Batalla naval
 
         char[][] matriz = tablero.getTablero();     //un tablero lleno de agua(~)
 
-        int[] tamaños = {2, 2};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
+        int[] tamaños = {2, 2, 3, 4};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
         Barco[] barcos = new Barco[tamaños.length];
 
         for(int i = 0; i < tamaños.length; i++){
