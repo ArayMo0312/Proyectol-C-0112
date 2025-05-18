@@ -1,8 +1,8 @@
 import java.util.Scanner;
 public class BatallaNaval { // Clase de Batalla naval
     
-    Tablero tableroJ1 = new Tablero();
-    Tablero tableroJ2 = new Tablero();
+    JugadorBN jugador1;
+    JugadorBN jugador2;
     Scanner input = new Scanner(System.in);
 
     public void InicioBS(){
@@ -18,6 +18,17 @@ public class BatallaNaval { // Clase de Batalla naval
 
         input.nextLine();
         
+        System.out.print("Ingrese el nombre del Jugador 1: ");
+        String nombre1 = input.nextLine();
+        jugador1 = new JugadorBN(nombre1);
+        System.out.println("");
+        
+        System.out.print("Ingrese el nombre del Jugador 2: ");
+        String nombre2 = input.nextLine();
+        jugador2 = new JugadorBN(nombre2);
+        System.out.println("");
+
+
         System.out.println();
         System.out.println("Listos para la batalla?");
         System.out.println("(Presione ENTER para comenzar)");
@@ -29,19 +40,19 @@ public class BatallaNaval { // Clase de Batalla naval
 
         boolean turno = true;
 
-        while(quedanBarcos(tableroJ1) && quedanBarcos(tableroJ2)) {
+        while(quedanBarcos(jugador1) && quedanBarcos(jugador2)) {
             if(turno){
-                System.out.println("Jugador 1 Ataca!");
+                System.out.println(jugador1.getNombre() + " Ataca!");
                 System.out.println("");
-                System.out.println("(Tablero J2)");
-                tableroJ2.tableroOculto();  //Muestra el tablero oculto del jugador 2
+                System.out.println("(Tablero " + jugador2.getNombre() +")");
+                jugador2.getTablero().tableroOculto();  //Muestra el tablero oculto del jugador 2
                 System.out.println("");
 
-                boolean acierto = atacar(tableroJ2);
+                boolean acierto = atacar(jugador2);
 
                 System.out.println("");
-                System.out.println("(Tablero J2)");
-                tableroJ2.tableroOculto();  //Muestra el tablero del jugador 2 post ataque
+                System.out.println("(Tablero de " + jugador2.getNombre() +")");
+                jugador2.getTablero().tableroOculto();  //Muestra el tablero del jugador 2 post ataque
                 System.out.println("");
 
                 if(!acierto){
@@ -64,17 +75,17 @@ public class BatallaNaval { // Clase de Batalla naval
 
             }
             else{
-                System.out.println("Jugador 2 Ataca!");
+                System.out.println(jugador2.getNombre() + " Ataca!");
                 System.out.println("");
-                System.out.println("(Tablero J1)");
-                tableroJ1.tableroOculto(); //Muestra el tablero oculto del jugador 1
+                System.out.println("(Tablero de " + jugador1.getNombre() +")");
+                jugador1.getTablero().tableroOculto(); //Muestra el tablero oculto del jugador 1
                 System.out.println("");
 
-                boolean acierto = atacar(tableroJ1);
+                boolean acierto = atacar(jugador1);
 
                 System.out.println("");
-                System.out.println("(Tablero J1)");
-                tableroJ1.tableroOculto();  //Muestra el tablero del jugador1 post ataque
+                System.out.println("(Tablero " + jugador1.getNombre() + ")");
+                jugador1.getTablero().tableroOculto();  //Muestra el tablero del jugador1 post ataque
                 System.out.println("");
 
                 if(!acierto){
@@ -98,14 +109,14 @@ public class BatallaNaval { // Clase de Batalla naval
                 
             }
         }
-        if(!quedanBarcos(tableroJ2)){       //Al salir del while porque ya no quedan barcos en alun tablero anuncia al ganador!
-            System.out.println("---------------EL ganador es el Jugador 1!!!!---------------"); 
+        if(!quedanBarcos(jugador2)){       //Al salir del while porque ya no quedan barcos en alun tablero anuncia al ganador!
+            System.out.println("---------------EL ganador es "+ jugador1.getNombre()+"!!!!---------------"); 
             System.out.println("");
             System.out.println("......................Fin del juego.........................");
             System.out.println("");
         }
         else{
-            System.out.println("---------------EL ganador es el Jugador 2!!!!---------------");
+            System.out.println("---------------EL ganador es "+ jugador2.getNombre()+"!!!!---------------");
             System.out.println("");
             System.out.println("......................Fin del juego.........................");
             System.out.println("");
@@ -113,16 +124,16 @@ public class BatallaNaval { // Clase de Batalla naval
         
     }
 
-    public void colocarBarcos(Tablero tablero){
+    public void colocarBarcos(JugadorBN jugador){
 
-        char[][] matriz = tablero.getTablero();     //un tablero lleno de agua(~)
-
-        int[] tamaños = {2, 2, 3, 4};       //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
+        Tablero tablero = jugador.getTablero();
+        char[][] matriz = tablero.getTablero();     //El tablero del jugador lleno de agua(~)
+        int[] tamaños = {2, 2, 3, 4};               //Los tamaños delos barcos (Segun la direccion varian, mas adelante se seleccionara y se indentificara cual lado es el ancho y cual es el largo)
         Barco[] barcos = new Barco[tamaños.length];
 
         for(int i = 0; i < tamaños.length; i++){
 
-            boolean colocado = false;       //No se han colocado los barcos
+            boolean colocado = false;               //No se han colocado los barcos
             
             while(!colocado){
 
@@ -201,14 +212,19 @@ public class BatallaNaval { // Clase de Batalla naval
                 colocado = true;
 
             }
+
+            for (int h = 0; h < barcos.length; h++) {
+            jugador.setBarcos(h, barcos[h]);
+            
+            }
         }
 
     }
     
-    public boolean atacar(Tablero tablero){            //metodo para atacar un tablero
+    public boolean atacar(JugadorBN jugador){            //metodo para atacar un tablero
 
         Scanner input = new Scanner(System.in);
-        char[][] matriz = tablero.getTablero();
+        char[][] matriz = jugador.getTablero().getTablero();
 
         
 
@@ -250,8 +266,8 @@ public class BatallaNaval { // Clase de Batalla naval
     }
 
 
-    public boolean quedanBarcos(Tablero tablero) {
-        char[][] matriz = tablero.getTablero();
+    public boolean quedanBarcos(JugadorBN jugador) {
+        char[][] matriz = jugador.getTablero().getTablero();
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
                 if (matriz[i][j] == 'B') {
@@ -266,25 +282,25 @@ public class BatallaNaval { // Clase de Batalla naval
     public void Jugadores(){
 
 
-        System.out.println("Jugador 1, coloca los barcos en el tablero");
+        System.out.println(jugador1.getNombre() +", coloca los barcos en el tablero");
         System.out.println();
 
-        colocarBarcos(tableroJ1);       // El jugador 1 coloca los barcos respectivos
+        colocarBarcos(jugador1);       // El jugador 1 coloca los barcos respectivos
 
-        System.out.println("Tablero del Jugador 1:");
-        tableroJ1.mostrarTablero();     //imprime el tablero para ver la colocacion
+        System.out.println("Tablero de " + jugador1.getNombre());
+        jugador1.getTablero().mostrarTablero();     //imprime el tablero para ver la colocacion
         System.out.println("(Presione ENTER para continuar)");
         input.nextLine();
         input.nextLine();
         GUI.limpiarPantalla();
 
-        System.out.println("Jugador 2, coloca los barcos en el tablero");
+        System.out.println(jugador2.getNombre() + ", coloca los barcos en el tablero");
         System.out.println();
 
-        colocarBarcos(tableroJ2);       // El jugador  coloca los barcos respectivos
+        colocarBarcos(jugador2);       // El jugador  coloca los barcos respectivos
 
-        System.out.println("Tablero del Jugador 2:");
-        tableroJ2.mostrarTablero();     //imprime el tablero para ver la colocacion
+        System.out.println("Tablero de " + jugador2.getNombre());
+        jugador2.getTablero().mostrarTablero();     //imprime el tablero para ver la colocacion
         System.out.println("(Presione ENTER para continuar)");  
         input.nextLine();
         input.nextLine();
