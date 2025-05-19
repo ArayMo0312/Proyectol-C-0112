@@ -5,6 +5,7 @@ var annotated_dup =
     [ "BatallaNaval", "class_batalla_naval.html", "class_batalla_naval" ],
     [ "GUI", "class_g_u_i.html", "class_g_u_i" ],
     [ "JugadorAhorcado", "class_jugador_ahorcado.html", "class_jugador_ahorcado" ],
+    [ "JugadorBN", "class_jugador_b_n.html", "class_jugador_b_n" ],
     [ "Main", "class_main.html", null ],
     [ "Tablero", "class_tablero.html", "class_tablero" ]
 ];
